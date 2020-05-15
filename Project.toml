@@ -1,0 +1,4 @@
+name = "ImageDataIO"
+uuid = "3d2e8b00-a1b7-4eb6-bd24-c7e2252788fb"
+authors = ["goldenratio1618 <adamatanas@gmail.com>"]
+version = "0.1.0"
