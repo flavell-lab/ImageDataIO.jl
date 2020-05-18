@@ -41,11 +41,4 @@ function read_centroids_roi(input)
     end
     return centroids
 end
-                
 
-"""
-Converts `centroids` into an image mask of size `imsize`
-"""
-function centroids_to_img(imsize, centroids)
-    return map(x->Tuple(x) in centroids, CartesianIndices(imsize))
-end
