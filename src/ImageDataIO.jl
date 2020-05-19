@@ -1,5 +1,7 @@
 module ImageDataIO
 
+using HDF5
+
 include("centroids_io.jl")
 include("worm_features_io.jl")
 

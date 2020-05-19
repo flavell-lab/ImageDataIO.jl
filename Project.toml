@@ -2,3 +2,6 @@ name = "ImageDataIO"
 uuid = "3d2e8b00-a1b7-4eb6-bd24-c7e2252788fb"
 authors = ["goldenratio1618 <adamatanas@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+HDF5 = "f67ccb44-e63f-5c2f-98bd-6dc0ccc4ba2f"
