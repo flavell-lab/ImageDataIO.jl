@@ -1,6 +1,6 @@
 module ImageDataIO
 
-using HDF5, MHDIO
+using HDF5, MHDIO, FileIO
 
 include("centroids_io.jl")
 include("worm_features_io.jl")
