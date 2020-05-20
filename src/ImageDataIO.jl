@@ -4,6 +4,8 @@ using HDF5, MHDIO
 
 include("centroids_io.jl")
 include("worm_features_io.jl")
+include("activity_io.jl")
+include("segmentation_io.jl")
 
 export
         load_registration_problems,
