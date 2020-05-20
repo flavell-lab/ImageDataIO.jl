@@ -13,13 +13,17 @@ end
 
 """
 Loads UNet predictions in 3D dataset `h5_file::String`.
-Assumes binary predictions that are stored in the fourth dimension of the file.
-Returns the portion of `predictions` field corresponding to foreground
-with probability at least `threshold::Real`
+Assumes predictions are stored in the fourth dimension of the file.
+Returns the portion of `predictions` field corresponding to foreground.
+Can optionally set `threshold` to binarize predictions.
 """
-function load_predictions(h5_file::String, threshold::Real)
-    prediction_set = open(h5_file, "r")
+function load_predictions(h5_file::String; threshold=nothing)
+    prediction_set = h5open(h5_file, "r")
     predictions = read(prediction_set, "predictions")[:,:,:,2]
     close(prediction_set)
-    return predictions .> threshold
+    if threshold == nothing
+        return predictions
+    else
+        return predictions .> threshold
+    end
 end
