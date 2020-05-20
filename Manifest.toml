@@ -15,6 +15,12 @@ git-tree-sha1 = "aa9ef39b54a168c3df1b2911e7797e4feee50fbe"
 uuid = "0b7ba130-8d10-5ba8-a3d6-c5182647fed9"
 version = "1.14.3+1"
 
+[[DataStructures]]
+deps = ["InteractiveUtils", "OrderedCollections"]
+git-tree-sha1 = "7d7578b00789cf16c5f68fad71868e773edd58a2"
+uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+version = "0.17.16"
+
 [[Dates]]
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
@@ -54,12 +60,25 @@ git-tree-sha1 = "e1a93171a400d4578193eaa39edd2d3f5db08fb6"
 uuid = "5ced341a-0733-55b8-9ab6-a4889d929147"
 version = "1.9.2+0"
 
+[[MHDIO]]
+deps = ["DataStructures"]
+git-tree-sha1 = "da4086256bbe68ef6e936354a066274d969208ea"
+repo-rev = "master"
+repo-url = "git@github.com:flavell-lab/MHDIO.jl.git"
+uuid = "7d797e2a-7db6-11e9-07d5-4fa370062df3"
+version = "0.1.0"
+
 [[Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
+
+[[OrderedCollections]]
+git-tree-sha1 = "12ce190210d278e12644bcadf5b21cbdcf225cd3"
+uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+version = "1.2.0"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Test", "UUIDs"]
@@ -99,9 +118,9 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [[Zlib_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "2f6c3e15e20e036ee0a0965879b31442b7ec50fa"
+git-tree-sha1 = "a2e0d558f6031002e380a90613b199e37a8565bf"
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.11+9"
+version = "1.2.11+10"
 
 [[Zstd_jll]]
 deps = ["Libdl", "Pkg"]
