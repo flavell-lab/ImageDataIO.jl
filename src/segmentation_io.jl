@@ -3,7 +3,7 @@ Loads training (or validation dataset) in 3D dataset `h5_file::String`.
 Returns `raw`, `label`, and `weight` fields.
 """
 function load_training_set(h5_file::String)
-    training_set = open(h5_file, "r")
+    training_set = h5open(h5_file, "r")
     raw = read(training_set, "raw")[:,:,:]
     label = read(training_set, "label")[:,:,:]
     weight = read(training_set, "weight")[:,:,:]
