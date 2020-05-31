@@ -55,7 +55,7 @@ function modify_mhd(mhd_in::String, mhd_out::String, substitutions::Dict)
             end
         end
     end
-    open(param_out, "w") do f
+    open(mhd_out, "w") do f
         write(f, result_str)
     end
 end
