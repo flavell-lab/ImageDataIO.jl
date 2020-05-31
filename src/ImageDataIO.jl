@@ -19,5 +19,6 @@ export
         load_predictions,
         read_activity,
         write_activity,
-        modify_parameter_file
+        modify_parameter_file,
+        modify_mhd
 end # module
