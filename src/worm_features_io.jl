@@ -32,6 +32,8 @@ function read_head_pos(head_path::String)
 end
 
 """
+`function read_mhd(rootpath, img_prefix, mhd_path, frame, channel)`:
+
 Reads MHD file from `rootpath/mhd_path/img_prefix_tchannel.mhd` and outputs resulting image.
 """
 function read_mhd(rootpath, img_prefix, mhd_path, frame, channel)
