@@ -32,9 +32,9 @@ function load_predictions(h5_file::String; threshold=nothing)
 end
 
 """
-Outputs `watershed_errors` to `path`.
+Writes `watershed_errors` to `path`.
 """
-function output_watershed_errors(watershed_errors, path)
+function write_watershed_errors(watershed_errors, path)
     open(path, "w") do f
         for frame in keys(watershed_errors)
             s = ""
@@ -47,9 +47,9 @@ function output_watershed_errors(watershed_errors, path)
 end
 
 """
-Imports watershed errors from `path`.
+Reads watershed errors from `path`.
 """
-function import_watershed_errors(path)
+function read_watershed_errors(path)
     watershed_errors = Dict()
     open(path, "r") do f
         for line in eachline(f)

@@ -20,5 +20,7 @@ export
         read_activity,
         write_activity,
         modify_parameter_file,
-        modify_mhd
+        modify_mhd,
+        write_watershed_errors,
+        read_watershed_errors
 end # module
