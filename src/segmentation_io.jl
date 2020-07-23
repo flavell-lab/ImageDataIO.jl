@@ -30,3 +30,37 @@ function load_predictions(h5_file::String; threshold=nothing)
         return predictions .> threshold
     end
 end
+
+"""
+Outputs `watershed_errors` to `path`.
+"""
+function output_watershed_errors(watershed_errors, path)
+    open(path, "w") do f
+        for frame in keys(watershed_errors)
+            s = ""
+            for i=1:length(watershed_errors[frame])
+                s = s*string(watershed_errors[frame][i])*","
+            end
+            write(f, "$(frame) $(s[1:end-1])\n")
+        end
+    end
+end
+
+"""
+Imports watershed errors from `path`.
+"""
+function import_watershed_errors(path)
+    watershed_errors = Dict()
+    open(path, "r") do f
+        for line in eachline(f)
+            s = split(line)
+            frame = parse(Int32, s[1])
+            if length(s) == 1
+                watershed_errors[frame] = []
+            else
+                watershed_errors[frame] = map(x->parse(Int32, x), split(s[2], ","))
+            end
+        end
+    end
+    return watershed_errors
+end
