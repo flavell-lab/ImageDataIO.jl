@@ -1,8 +1,10 @@
 """
+`function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)``
 Modifies an elastix transform parameter file `param_in` by changing every entry of it that is a key in `substitutions`
-to the corresponding value. Writes the output to `param_out`.
+to the corresponding value. Writes the output to `param_out`. If keyword parameter `is_universal` is set to true,
+it will simply find/replace all instances of text in `substitutions` regardless of if it is a key.
 """
-function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict)
+function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)
     result_str = ""
     open(param_in, "r") do f
         for line in eachline(f)
@@ -10,10 +12,13 @@ function modify_parameter_file(param_in::String, param_out::String, substitution
                 result_str *= line*"\n"
                 continue
             end
+
             line_key = split(line)[1][2:end]
             found = false
             for key in keys(substitutions)
-                if key == line_key
+                if is_universal
+                    result_str *= replace(line, key => substitutions[key]) * "\n"
+                elseif key == line_key
                     result_str *= "($key $(substitutions[key]))\n"
                     found = true
                     break
