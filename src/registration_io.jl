@@ -24,7 +24,7 @@ function modify_parameter_file(param_in::String, param_out::String, substitution
                     break
                 end
             end
-            if !found
+            if !is_universal && !found
                 result_str *= line*"\n"
             end
         end
