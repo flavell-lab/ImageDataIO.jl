@@ -9,7 +9,7 @@ function back_one_dir(dir)
     if dir[1] == '/'
         prefix = "/"
     end
-    return prefix*reduce(joinpath, split(dir, "/"))
+    return prefix*reduce(joinpath, split(dir, "/")[1:end-1])
 end
 
 """
