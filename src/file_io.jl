@@ -6,7 +6,7 @@ function back_one_dir(dir)
         dir = dir[1:end-1]
     end
     prefix = ""
-    if dir[1] == "/"
+    if dir[1] == '/'
         prefix = "/"
     end
     return prefix*reduce(joinpath, split(dir, "/"))
