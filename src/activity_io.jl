@@ -21,3 +21,4 @@ function read_activity(input)
     end
     return activity
 end
+
