@@ -19,15 +19,15 @@ Reads 2D dictionary (dictionary of dictionaries) from a file.
 - `inner_key_dtype::Type`: data type of inner keys
 - `val_dtype::Type`: data type of values of inner dict
 """
-function read_2ddict(input::AbstractString, outer_key_dtype::Type, inner_key_dtype::Type, val_dtype::Type)
+function read_2d_dict(input::AbstractString, outer_key_dtype::Type, inner_key_dtype::Type, val_dtype::Type)
     dict = Dict()
     open(input) do f
         for line in eachline(f)
-            k = Tuple(parse_1dtuple(split(line, "Dict")[1], outer_key_dtype))
+            k = Tuple(parse_1d_tuple(split(line, "Dict")[1], outer_key_dtype))
             if length(k) == 1
                 k = k[1]
             end
-            v = parse_1ddict(split(line, "}(")[2], inner_key_dtype, val_dtype)
+            v = parse_1d_dict(split(line, "}(")[2], inner_key_dtype, val_dtype)
             dict[k] = v
         end
     end
@@ -38,7 +38,7 @@ end
 """
 Parses one-dimensional string tuple `tuple_str::AbstractString` into a tuple of the specified `dtype::Type`
 """
-function parse_1dtuple(tuple_str::AbstractString, dtype::Type)
+function parse_1d_tuple(tuple_str::AbstractString, dtype::Type)
     return Tuple(map(x->parse(dtype, x), split(replace(tuple_str, r"\(|\)|\[|\]"=>""), ",")))
 end
 
@@ -50,7 +50,7 @@ Parses a 1D dictionary; the keys and values must be at most 1D arrays. Arguments
 - `key_dtype::Type`: element data type of dictionary keys
 - `val_dtype::Type`: element data type of dictionary values
 """
-function parse_1ddict(dict_str::AbstractString, key_dtype::Type, val_dtype::Type)
+function parse_1d_dict(dict_str::AbstractString, key_dtype::Type, val_dtype::Type)
     dict = Dict()
     kv_pairs = split(dict_str, "=>")
     for i=1:length(kv_pairs) - 1
