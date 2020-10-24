@@ -1,12 +1,43 @@
 """
-Writes dictionary `dict` to file `out::AbstractString`
+Writes a dictionary to a file.
+
+# Arguments
+- `dict`: Dictionary to write
+- `out::AbstractString`: filename to write to
+- `kv_delimiter::AbstractString` (optional, default " ") delimiter between keys and values
+- `kk_delimiter::AbstractString` (optional, default "\n") delimiter between subsequent keys
 """
-function write_dict(dict, out::AbstractString)
+function write_dict(dict, out::AbstractString; kv_delimiter::AbstractString=" ", kk_delimiter::AbstractString="\n")
     open(out, "w") do f
         for k in keys(dict)
-            write(f, "$(k) $(dict[k])\n")
+            write(f, "$(k)$(kv_delimiter)$(dict[k])$(kk_delimiter)")
         end
     end
+end
+
+"""
+Adds or retrieves a key from a given layer of a nested dictionary.
+
+# Arguments
+- `dict`: Dictionary to operate on
+- `key`: Key to interact with
+- `n::Integer`: The layer of the dictionary to interact with
+- `extract::Bool`: If true, extracts the key from the dictionary; if false, adds the key to the dictionary instead.
+"""
+function extract_key(dict, key, n::Integer, extract::Bool)
+    new_dict = Dict()
+    if n == 1
+        if extract
+            return dict[key]
+        else
+            new_dict[key] = dict
+            return new_dict
+        end
+    end
+    for k in keys(dict)
+        new_dict[k] = extract_key(dict[k], key, n-1, extract)
+    end
+    return new_dict
 end
 
 
