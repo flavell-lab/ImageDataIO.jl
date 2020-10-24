@@ -7,6 +7,8 @@ include("worm_features_io.jl")
 include("activity_io.jl")
 include("segmentation_io.jl")
 include("registration_io.jl")
+include("file_io.jl")
+include("dictionary_io.jl")
 
 export
         load_registration_problems,
@@ -22,5 +24,13 @@ export
         modify_parameter_file,
         modify_mhd,
         write_watershed_errors,
-        read_watershed_errors
+        read_watershed_errors,
+        back_one_dir,
+        get_filename,
+        write_dict,
+        read_2d_dict,
+        parse_1d_tuple,
+        parse_1d_dict,
+        split_arrays,
+        multi_index_array
 end # module
