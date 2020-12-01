@@ -6,7 +6,7 @@ Loads a set of registration problems into an array.
 function load_registration_problems(edge_file_paths::Array{String,1})
     reg_problems = []
     for edge_file in edge_file_paths
-        open(edge_file, "r) do f
+        open(edge_file, "r") do f
             for line in eachline(f)
                 push!(reg_problems, Tuple(map(x->parse(Int64, x), split(line))))
             end
