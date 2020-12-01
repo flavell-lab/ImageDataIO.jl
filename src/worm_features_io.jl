@@ -1,13 +1,12 @@
 """
 Loads a set of registration problems into an array.
 # Arguments:
-- `rootpath::String`: working directory of registration quality data
-- `edge_files::Array{String, 1}`: files containing registration problems
+- `edge_file_paths::Array{String, 1}`: paths containing registration problems
 """
-function load_registration_problems(rootpath::String, edge_files::Array{String,1})
+function load_registration_problems(edge_file_paths::Array{String,1})
     reg_problems = []
-    for edge_file in edge_files
-        open(joinpath(rootpath, edge_file)) do f
+    for edge_file in edge_file_paths
+        open(edge_file, "r) do f
             for line in eachline(f)
                 push!(reg_problems, Tuple(map(x->parse(Int64, x), split(line))))
             end
