@@ -32,5 +32,6 @@ export
         parse_1d_tuple,
         parse_1d_dict,
         split_arrays,
-        multi_index_array
+        multi_index_array,
+        extract_key
 end # module
