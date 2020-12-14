@@ -1,6 +1,6 @@
 module ImageDataIO
 
-using FlavellBase, HDF5, MHDIO, ProgressMeter, GPUFilter
+using FlavellBase, Statistics, HDF5, MHDIO, ProgressMeter, GPUFilter
 
 include("centroids_io.jl")
 include("worm_features_io.jl")
