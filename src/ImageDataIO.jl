@@ -9,6 +9,7 @@ include("segmentation_io.jl")
 include("registration_io.jl")
 include("file_io.jl")
 include("dictionary_io.jl")
+include("filter_mhd.jl")
 
 export
         load_registration_problems,
@@ -33,5 +34,7 @@ export
         parse_1d_dict,
         split_arrays,
         multi_index_array,
-        extract_key
+        extract_key,
+	# filter_mhd.jl
+	filter_mhd_gpu
 end # module
