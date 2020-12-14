@@ -102,6 +102,14 @@ git-tree-sha1 = "c1cf9e87a5c45f0c05dc31ae95757f706e70865a"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
 version = "0.10.1"
 
+[[FlavellBase]]
+deps = ["Statistics", "Test"]
+git-tree-sha1 = "51d83f39468a7882c14b0f46b53005a9cc883041"
+repo-rev = "master"
+repo-url = "git@github.com:flavell-lab/FlavellBase.jl.git"
+uuid = "88015601-1e04-46e4-b006-ffd03bd63f42"
+version = "0.1.0"
+
 [[GPUArrays]]
 deps = ["AbstractFFTs", "Adapt", "LinearAlgebra", "Printf", "Random", "Serialization"]
 git-tree-sha1 = "2c1dd57bca7ba0b3b4bf81d9332aeb81b154ef4c"
