@@ -24,7 +24,6 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
     path_mhd = joinpath(path_dir_mhd, f_basename(t_range[1], list_ch[1]) * ".mhd")
     img = read_img(MHD(path_mhd))
     type_img = eltype(img)
-    n_x, n_y, n_z = size(img)
     n_t = length(t_range)
     
     # getting the filter parameter
@@ -40,8 +39,6 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
     end
 
     # filtering
-    img = zeros(Float32, n_x, n_y, n_z)
-    img_filt = zeros(type_img, n_x, n_y, n_z)
     @showprogress for t = t_range
         for (i_ch, ch) = enumerate(list_ch)
             λ_ch = list_λ[i_ch]
@@ -51,7 +48,9 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
             path_raw_filt = joinpath(path_dir_mhd_filt, basename * ".raw")
             path_MIP = joinpath(path_dir_MIP_filt, basename * ".png")
             
-            img .= Float32.(read_img(MHD(path_mhd)))
+            img = Float32.(read_img(MHD(path_mhd)))
+            n_x, n_y, n_z = size(img)
+            img_filt = zeros(type_img, n_x, n_y, n_z)
             for z = 1:n_z
                 img_filt[:,:,z] .= round.(type_img, gpu_imROF(img[:,:,z], λ_ch, 100))
             end
