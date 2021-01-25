@@ -35,6 +35,7 @@ export
         split_arrays,
         multi_index_array,
         extract_key,
+        add_get_basename!,
 	# filter_mhd.jl
 	filter_mhd_gpu
 end # module
