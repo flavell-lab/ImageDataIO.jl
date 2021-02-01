@@ -10,6 +10,7 @@ include("registration_io.jl")
 include("file_io.jl")
 include("dictionary_io.jl")
 include("filter_mhd.jl")
+include("shear_correction.jl")
 
 export
         load_registration_problems,
@@ -36,6 +37,8 @@ export
         multi_index_array,
         extract_key,
         add_get_basename!,
-	# filter_mhd.jl
+	# filter_mhd.jl,
 	filter_mhd_gpu
+	# shear_correction.jl
+	shear_correction_mhd
 end # module
