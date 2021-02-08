@@ -35,7 +35,7 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
             push!(list_img_λ, read_img(MHD(path_mhd)))
         end
         println("ch$ch parameter:")
-        push!(list_λ, get_λ(Float32.(list_img_λ)))
+        push!(list_λ, get_λ(list_img_λ))
     end
 
     # filtering
