@@ -1,10 +1,10 @@
-function get_λ(img_array::Array{<:AbstractFloat,4}; verbose=true)
+function get_λ(img_list::Array; verbose=true)
     # img_array dim: x, y, z, t
-    n_t = size(img_array, 4)
+    n_t = size(img_list, 4)
 
     θ_list = []
     for t = 1:n_t
-        img_MIP = Float32.(maxprj(img_array[:,:,:,t], dims=3))
+        img_MIP = Float32.(maxprj(img_list[t], dims=3))
         push!(θ_list, compute_λ_filt(img_MIP))
     end
     
@@ -35,7 +35,7 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
             push!(list_img_λ, read_img(MHD(path_mhd)))
         end
         println("ch$ch parameter:")
-        push!(list_λ, get_λ(Float32.(cat(list_img_λ..., dims=4))))
+        push!(list_λ, get_λ(Float32.(list_img_λ)))
     end
 
     # filtering
