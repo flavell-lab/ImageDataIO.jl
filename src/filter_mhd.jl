@@ -15,9 +15,10 @@ function get_λ(img_list::Array; verbose=true)
     λ_μ
 end
 
-function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_basename::Function; vmax=1600)
-    path_dir_mhd_filt = param_path["path_dir_mhd_filt"]
-    path_dir_MIP_filt = param_path["path_dir_MIP_filt"]
+function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_basename::Function; mhd_filt_dir_key::String="path_dir_mhd_filt", 
+        mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600)
+    path_dir_mhd_filt = param_path[mhd_filt_dir_key]
+    path_dir_MIP_filt = param_path[mip_filt_dir_key]
     create_dir.([path_dir_mhd_filt, path_dir_MIP_filt])
     
     # getting image size
