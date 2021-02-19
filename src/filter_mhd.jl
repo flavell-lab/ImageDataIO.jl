@@ -1,6 +1,6 @@
 function get_λ(img_list::Array; verbose=true)
     # img_array dim: x, y, z, t
-    n_t = size(img_list, 4)
+    n_t = length(img_list)
 
     θ_list = []
     for t = 1:n_t
