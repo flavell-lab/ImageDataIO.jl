@@ -142,6 +142,13 @@ function split_arrays(arrays::AbstractString; fwd_delimiters=['[', '('], back_de
     return arrs
 end
 
+"""
+Adds `get_basename` key to the dictionary `param_path`.
+"""
+function add_get_basename!(param_path::Dict)
+    param_path["get_basename"] = (t::Int, ch::Int) -> param_path["img_prefix"]*"_t$(lpad(t, 4, "0"))_ch$(ch)"
+end
+
 
 """
 Indexes a nested `array` at `index` as though the array was a mulit-dimensional array.
@@ -153,5 +160,3 @@ function multi_index_array(array, index)
     end
     return sub_array
 end
-
-
