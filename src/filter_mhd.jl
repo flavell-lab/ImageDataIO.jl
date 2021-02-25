@@ -29,6 +29,7 @@ Runs total variation filtering on a set of images.
  - `f_basename::Function`: Function that returns MHD filename given time point and channel
  - `mhd_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MHD files. Default `path_dir_mhd_filt`
  - `mip_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MIP files. Default `path_dir_MIP_filt`
+ - `vmax`: Contrast setting for png files
 """
 function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch, f_basename::Function; mhd_filt_dir_key::String="path_dir_mhd_filt", 
         mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600)
