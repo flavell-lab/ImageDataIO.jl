@@ -41,5 +41,5 @@ export
 	# filter_mhd.jl,
 	filter_mhd_gpu,
 	# shear_correction.jl
-	shear_correction_mhd
+	shear_correction_mhd!
 end # module
