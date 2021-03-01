@@ -38,10 +38,10 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch_list, shear_par
         # first channel in list does the registration; the other channels use the same one
         for ch = ch_list
             basename = param_path["get_basename"](t, ch)
-            path_mhd_in = joinpath(param_path["path_dir_mhd"], basename * ".mhd")
-            path_mhd_out = joinpath(param_path["path_dir_mhd_shearcorrect"], basename * ".mhd")
-            path_raw_out = joinpath(param_path["path_dir_mhd_shearcorrect"], basename * ".raw")
-            path_MIP_out = joinpath(param_path["path_dir_MIP_shearcorrect"], basename * ".png")
+            path_mhd_in = joinpath(param_path[mhd_key], basename * ".mhd")
+            path_mhd_out = joinpath(param_path[mhd_out_key], basename * ".mhd")
+            path_raw_out = joinpath(param_path[mhd_out_key], basename * ".raw")
+            path_MIP_out = joinpath(param_path[MIP_out_key], basename * ".png")
 
             img_stack .= Float32.(read_img(MHD(path_mhd_in)))
             reg_stack_translate!(img_stack, img_stack_reg, img1_g, img2_g, img1_f_g, img2_f_g, CC_g, N_g, z_center=nothing, reg_params=shear_params_dict[t])
