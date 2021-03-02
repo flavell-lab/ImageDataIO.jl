@@ -48,6 +48,9 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch
     for ch = list_ch
         list_img_λ = []
         for t = [round(Int, n_t * i / 10) for i = 1:10]
+            if !(t in t_range)
+                continue
+            end
             path_mhd = joinpath(path_dir_mhd, f_basename(t, ch) * ".mhd")
             push!(list_img_λ, read_img(MHD(path_mhd)))
         end
