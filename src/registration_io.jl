@@ -1,10 +1,14 @@
 """
-`function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)``
-Modifies an elastix transform parameter file `param_in` by changing every entry of it that is a key in `substitutions`
-to the corresponding value. Writes the output to `param_out`. If keyword parameter `is_universal` is set to true,
-it will simply find/replace all instances of text in `substitutions` regardless of if it is a key.
+`function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)`
+Modifies an elastix transform parameter file.
+
+# Arguments
+ - `param_in::String`: Path to parameter file to modify
+ - `param_out::String`: Path to modified parameter file output
+ - `substitutions::Dict`: Dictionary of substitutions. For each key in `substitutions`, if it is a key in the parameter file, replace its value with the value in `substitutions`.
+ - `is_universal::Bool` (optional):  If set to true, instead find/replace all instances of keys in `substitutions` regardless of if it is a key in the parameter file
 """
-function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)
+function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal::Bool=false)
     result_str = ""
     open(param_in, "r") do f
         for line in eachline(f)
@@ -70,8 +74,12 @@ function read_parameter_file(parameter_file_path::String, key::String, dtype::Ty
 end
 
 """
-Modifies an mhd file `mhd_in` by changing every entry of it that is a key in `substitutions`
-to the corresponding value. Writes the output to `mhd_out`.
+Modifies an MHD file.
+
+# Arguments
+ - `mhd_in::String`: Path to file to modify
+ - `mhd_out::String`: Path to output file 
+ - `substitutions::Dict`: Dictionary of substitutions. For each key in `substitutions`, if it is a key in the mhd file, replace its value with the value in `substitutions`.
 """
 function modify_mhd(mhd_in::String, mhd_out::String, substitutions::Dict)
     result_str = ""
