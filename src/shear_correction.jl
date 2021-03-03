@@ -51,5 +51,15 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch_list, shear_par
             imsave(path_MIP_out, maxprj(img_stack_reg, dims=3) / vmax, cmap="gray")
         end
     end
+ 
+    CUDA.unsafe_free!(img1_g)
+    CUDA.unsafe_free!(img2_g)
+    CUDA.unsafe_free!(img1_f_g)
+    CUDA.unsafe_free!(img2_f_g)
+    CUDA.unsafe_free!(CC_g)
+    CUDA.unsafe_free!(N_g)    
+    CUDA.reclaim()
+    GC.gc(true)
+ 
     return shear_params_dict
 end
