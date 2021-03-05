@@ -1,3 +1,6 @@
+"""
+Gets total variation noise filtering parameters from a list of images `img_list`. Can set `verbose` to `false` to suppress output.
+"""
 function get_λ(img_list::Array; verbose=true)
     # img_array dim: x, y, z, t
     n_t = length(img_list)
@@ -15,7 +18,20 @@ function get_λ(img_list::Array; verbose=true)
     λ_μ
 end
 
-function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_basename::Function; mhd_filt_dir_key::String="path_dir_mhd_filt", 
+"""
+Runs total variation filtering on a set of images.
+
+# Arguments
+ - `param_path::Dict`: Dictionary of locations of data
+ - `path_dir_mhd::String`: Location of MHD files to filter
+ - `t_range`: Time points to filter
+ - `list_ch`: Channels to filter
+ - `f_basename::Function`: Function that returns MHD filename given time point and channel
+ - `mhd_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MHD files. Default `path_dir_mhd_filt`
+ - `mip_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MIP files. Default `path_dir_MIP_filt`
+ - `vmax`: Contrast setting for png files
+"""
+function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch, f_basename::Function; mhd_filt_dir_key::String="path_dir_mhd_filt", 
         mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600)
     path_dir_mhd_filt = param_path[mhd_filt_dir_key]
     path_dir_MIP_filt = param_path[mip_filt_dir_key]
@@ -32,6 +48,9 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd, t_range, list_ch, f_base
     for ch = list_ch
         list_img_λ = []
         for t = [round(Int, n_t * i / 10) for i = 1:10]
+            if !(t in t_range)
+                continue
+            end
             path_mhd = joinpath(path_dir_mhd, f_basename(t, ch) * ".mhd")
             push!(list_img_λ, read_img(MHD(path_mhd)))
         end

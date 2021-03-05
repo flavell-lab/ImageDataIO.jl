@@ -24,6 +24,7 @@ export
         read_activity,
         write_activity,
         modify_parameter_file,
+        read_parameter_file,
         modify_mhd,
         write_watershed_errors,
         read_watershed_errors,
@@ -40,5 +41,5 @@ export
 	# filter_mhd.jl,
 	filter_mhd_gpu,
 	# shear_correction.jl
-	shear_correction_mhd
+	shear_correction_mhd!
 end # module
