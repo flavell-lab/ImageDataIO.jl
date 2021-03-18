@@ -13,7 +13,8 @@ Applies shear correction to a dataset.
  - `MIP_out_key::String` (optional): Key in `param_path` containing output MIP directory
 """
 function shear_correction_mhd!(param_path::Dict, param::Dict, ch::Int, shear_params_dict::Dict;
-        vmax::Int=1600, mhd_key::String="path_dir_mhd", mhd_out_key::String="path_dir_mhd_shearcorrect", MIP_out_key::String="path_dir_MIP_shearcorrect")
+        vmax::Int=1600, mhd_key::String="path_dir_mhd", mhd_out_key::String="path_dir_mhd_shearcorrect",
+        MIP_out_key::String="path_dir_MIP_shearcorrect")
     create_dir(param_path[mhd_out_key])
     create_dir(param_path[MIP_out_key])
     size_x, size_y, size_z = length(param["x_range"]), length(param["y_range"]), length(param["z_range"])
