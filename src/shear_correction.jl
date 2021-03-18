@@ -24,7 +24,7 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch::Int, shear_par
     N_g = CuArray{Float32}(undef, size_x, size_y);
     img_stack = zeros(Float32, size_x, size_y, size_z)
     img_stack_reg = zeros(Float32, size_x, size_y, size_z)
-    img_stack_reg_g = zeros(Float32, size_x, size_y, size_z)
+    img_stack_reg_g = CuArray{Float32}(undef, size_x, size_y, size_z)
 
     @showprogress for t = param["t_range"]
         # check if parameters exist at the given time point
