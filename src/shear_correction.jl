@@ -21,8 +21,7 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch::Int, shear_par
     img1_f_g = CuArray{Complex{Float32}}(undef, size_x, size_y)
     img2_f_g = CuArray{Complex{Float32}}(undef, size_x, size_y)
     CC2x_g = CuArray{Complex{Float32}}(undef, 2 * size_x, 2 * size_y)
-    N_g = CuArray{Float32}(undef, size_x, size_y);
-    img_stack = zeros(Float32, size_x, size_y, size_z)
+    N_g = CuArray{Float32}(undef, size_x, size_y)
     img_stack_reg = zeros(Float32, size_x, size_y, size_z)
     img_stack_reg_g = CuArray{Float32}(undef, size_x, size_y, size_z)
 
@@ -37,15 +36,15 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch::Int, shear_par
         path_raw_out = joinpath(param_path[mhd_out_key], basename * ".raw")
         path_MIP_out = joinpath(param_path[MIP_out_key], basename * ".png")
 
-        img_stack .= Float32.(read_img(MHD(path_mhd_in)))
-        reg_stack_translate!(img_stack, img_stack_reg, img_stack_reg_g, img1_f_g, img2_f_g, CC2x_g, N_g, reg_param=shear_params_dict[t])
-
+        copyto!(img_stack_reg_g, Float32.(read_img(MHD(path_mhd_in))))
+        reg_stack_translate!(img_stack_reg_g, img1_f_g, img2_f_g, CC2x_g, N_g, reg_param=shear_params_dict[t])
+        copyto!(img_stack_reg, img_stack_reg_g)
+  
         cp(path_mhd_in, path_mhd_out, force=true)
         write_raw(path_raw_out, floor.(UInt16, clamp.(img_stack_reg, typemin(UInt16), typemax(UInt16))))
         imsave(path_MIP_out, maxprj(img_stack_reg, dims=3) / vmax, cmap="gray")
     end
  
-    CUDA.unsafe_free!(img1_g)
     CUDA.unsafe_free!(img_stack_reg_g)
     CUDA.unsafe_free!(img1_f_g)
     CUDA.unsafe_free!(img2_f_g)
