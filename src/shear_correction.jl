@@ -45,7 +45,6 @@ function shear_correction_mhd!(param_path::Dict, param::Dict, ch::Int, shear_par
         imsave(path_MIP_out, maxprj(img_stack_reg, dims=3) / vmax, cmap="gray")
     end
  
-    CUDA.unsafe_free!(img1_g)
     CUDA.unsafe_free!(img_stack_reg_g)
     CUDA.unsafe_free!(img1_f_g)
     CUDA.unsafe_free!(img2_f_g)
