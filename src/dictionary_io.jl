@@ -151,6 +151,19 @@ end
 
 
 """
+Updates a dictionary of paths `param_path` by changing the old rootpath to the `new_rootpath`
+"""
+function change_rootpath!(param_path::Dict, new_rootpath::String)
+    old_rootpath = param_path["path_root_process"]
+    for k in keys(param_path)
+        if typeof(param_path[k]) == String
+            param_path[k] = replace(param_path[k], old_rootpath=>new_rootpath)
+        end
+    end
+end
+
+
+"""
 Indexes a nested `array` at `index` as though the array was a mulit-dimensional array.
 """
 function multi_index_array(array, index)

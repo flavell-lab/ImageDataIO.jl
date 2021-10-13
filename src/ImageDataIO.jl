@@ -38,6 +38,7 @@ export
         multi_index_array,
         extract_key,
         add_get_basename!,
+        change_rootpath!,
 	# filter_mhd.jl,
 	filter_mhd_gpu,
 	# shear_correction.jl
