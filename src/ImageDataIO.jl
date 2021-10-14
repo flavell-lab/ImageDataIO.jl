@@ -18,6 +18,7 @@ export
         write_centroids,
         read_centroids_transformix,
         read_centroids_roi,
+        resample_img,
         read_mhd,
         load_training_set,
         load_predictions,
