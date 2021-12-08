@@ -151,6 +151,21 @@ end
 
 
 """
+Adds `get_basename` key to the dictionary `param_path`, given information about multiple dataset timing in `param`.
+"""
+function add_get_basename!(param_path::Dict, param::Dict)
+    param_path["get_basename"] = (t::Int, ch::Int) -> let
+        t_eff = t
+        idx = 1
+        while t_eff > param["max_ts"][idx]
+            idx +=1
+            t_eff -= param["max_ts"][idx]
+        end
+        param_path["imgs_prefix"][idx]*"_t$(lpad(t_eff, 4, "0"))_ch$(ch)"
+    end
+end
+
+"""
 Updates a dictionary of paths `param_path` by changing the old rootpath to the `new_rootpath`
 """
 function change_rootpath!(param_path::Dict, new_rootpath::String)
