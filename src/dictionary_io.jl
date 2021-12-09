@@ -158,8 +158,8 @@ function add_get_basename!(param_path::Dict, param::Dict)
         t_eff = t
         idx = 1
         while t_eff > param["max_ts"][idx]
-            idx +=1
             t_eff -= param["max_ts"][idx]
+            idx +=1
         end
         param_path["imgs_prefix"][idx]*"_t$(lpad(t_eff, 4, "0"))_ch$(ch)"
     end
