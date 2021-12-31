@@ -35,10 +35,13 @@ jobs:
         with:
           repository: flavell-lab/FFTRegGPU.jl
           path: ./FFTRegGPU.jl
+          ref: main
+          token: ${{ secrets.GOLDENRATIO1618_ACCESS_TOKEN }}
       - uses: actions/checkout@v2
         with:
           repository: flavell-lab/NRRDIO.jl
           path: ./NRRDIO.jl
+          ref: main
           token: ${{ secrets.GOLDENRATIO1618_ACCESS_TOKEN }}
       - name: Install package
         run: julia --project=docs/ -e 'using Pkg; 
