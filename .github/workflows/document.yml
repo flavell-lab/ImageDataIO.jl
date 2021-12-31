@@ -31,7 +31,7 @@ jobs:
           repository: flavell-lab/MHDIO.jl
           path: ./MHDIO.jl
           token: ${{ secrets.GOLDENRATIO1618_ACCESS_TOKEN }}
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
         with:
           repository: flavell-lab/FFTRegGPU.jl
           path: ./FFTRegGPU.jl
