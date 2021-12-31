@@ -35,7 +35,7 @@ jobs:
         with:
           repository: flavell-lab/FFTRegGPU.jl
           path: ./FFTRegGPU.jl
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
         with:
           repository: flavell-lab/NRRDIO.jl
           path: ./NRRDIO.jl
