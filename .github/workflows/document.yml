@@ -35,6 +35,10 @@ jobs:
         with:
           repository: flavell-lab/FFTRegGPU.jl
           path: ./FFTRegGPU.jl
+      - uses: actions/checkout@master
+        with:
+          repository: flavell-lab/NRRDIO.jl
+          path: ./NRRDIO.jl
           token: ${{ secrets.GOLDENRATIO1618_ACCESS_TOKEN }}
       - name: Install package
         run: julia --project=docs/ -e 'using Pkg; 
@@ -47,6 +51,7 @@ jobs:
           Pkg.develop(PackageSpec(path="./GPUFilter.jl"));
           Pkg.develop(PackageSpec(path="./MHDIO.jl")); 
           Pkg.develop(PackageSpec(path="./FFTRegGPU.jl"));
+          Pkg.develop(PackageSpec(path="./NRRDIO.jl"));
           Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
       - name: Build and deploy
         env:
