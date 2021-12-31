@@ -10,7 +10,7 @@ include("segmentation_io.jl")
 include("registration_io.jl")
 include("file_io.jl")
 include("dictionary_io.jl")
-include("filter_mhd.jl")
+include("filter.jl")
 include("shear_correction.jl")
 
 export load_registration_problems,
@@ -42,6 +42,7 @@ export load_registration_problems,
     change_rootpath!,
     # filter_mhd.jl,
     filter_mhd_gpu,
+    filter_nrrd_gpu,
     # shear_correction.jl
     shear_correction_mhd!,
     shear_correction_nrrd!
