@@ -34,11 +34,7 @@ end
 `function read_mhd(rootpath, img_prefix, mhd_path, frame, channel)`:
 
 Reads MHD file from `rootpath/mhd_path/img_prefix_tchannel.mhd` and outputs resulting image.
-"""
-function read_mhd(rootpath, img_prefix, mhd_path, frame, channel)
-    return read_img(MHD(joinpath(rootpath, mhd_path, img_prefix*"_t"*string(frame, pad=4)*"_ch$(channel).mhd")))
-end
-        
+"""        
 function read_nrrd(rootpath, img_prefix, nrrd_path, frame, channel)
     return read_img(NRRD(joinpath(rootpath, nrrd_path, img_prefix*"_t"*string(frame, pad=4)*"_ch$(channel).nrrd")))
 end
