@@ -1,6 +1,6 @@
 module ImageDataIO
 
-using FlavellBase, PyPlot, Statistics, HDF5, MHDIO, ProgressMeter, GPUFilter,
+using FlavellBase, PyPlot, Statistics, HDF5, ProgressMeter, GPUFilter,
     CUDA, FFTRegGPU, NRRDIO
 
 include("centroids_io.jl")
@@ -19,7 +19,6 @@ export load_registration_problems,
     read_centroids_transformix,
     read_centroids_roi,
     resample_img,
-    read_mhd,
     read_nrrd,
     load_training_set,
     load_predictions,
@@ -27,7 +26,6 @@ export load_registration_problems,
     write_activity,
     modify_parameter_file,
     read_parameter_file,
-    modify_mhd,
     write_watershed_errors,
     read_watershed_errors,
     back_one_dir,
@@ -41,10 +39,8 @@ export load_registration_problems,
     extract_key,
     add_get_basename!,
     change_rootpath!,
-    # filter_mhd.jl,
-    filter_mhd_gpu,
+    # filter.jl,
     filter_nrrd_gpu,
     # shear_correction.jl
-    shear_correction_mhd!,
     shear_correction_nrrd!
 end # module
