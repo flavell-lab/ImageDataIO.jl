@@ -23,23 +23,26 @@ Runs total variation filtering on a set of images.
 
 # Arguments
  - `param_path::Dict`: Dictionary of locations of data
- - `path_dir_mhd::String`: Location of MHD files to filter
+ - `path_dir_nrrd::String`: Location of NRRD files to filter
  - `t_range`: Time points to filter
  - `list_ch`: Channels to filter
- - `f_basename::Function`: Function that returns MHD filename given time point and channel
- - `mhd_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MHD files. Default `path_dir_mhd_filt`
- - `mip_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store the output MIP files. Default `path_dir_MIP_filt`
+ - `f_basename::Function`: Function that returns NRRD filename given time point and channel
+ - `nrrd_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store
+the output NRRD files. Default `path_dir_nrrd_filt`
+ - `mip_filt_dir_key::String` (optional): Key in `param_path` that maps to the location to store
+the output MIP files. Default `path_dir_MIP_filt`
  - `vmax`: Contrast setting for png files
 """
-function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch, f_basename::Function; mhd_filt_dir_key::String="path_dir_mhd_filt", 
+function filter_nrrd_gpu(param_path::Dict, path_dir_nrrd::String, t_range, list_ch,
+        f_basename::Function; nrrd_filt_dir_key::String="path_dir_nrrd_filt", 
         mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600)
-    path_dir_mhd_filt = param_path[mhd_filt_dir_key]
+    path_dir_nrrd_filt = param_path[nrrd_filt_dir_key]
     path_dir_MIP_filt = param_path[mip_filt_dir_key]
-    create_dir.([path_dir_mhd_filt, path_dir_MIP_filt])
+    create_dir.([path_dir_nrrd_filt, path_dir_MIP_filt])
     
     # getting image size
-    path_mhd = joinpath(path_dir_mhd, f_basename(t_range[1], list_ch[1]) * ".mhd")
-    img = read_img(MHD(path_mhd))
+    path_nrrd = joinpath(path_dir_nrrd, f_basename(t_range[1], list_ch[1]) * ".nrrd")
+    img = read_img(NRRD(path_nrrd))
     type_img = eltype(img)
     n_t = length(t_range)
     
@@ -51,8 +54,8 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch
             if !(t in t_range)
                 continue
             end
-            path_mhd = joinpath(path_dir_mhd, f_basename(t, ch) * ".mhd")
-            push!(list_img_λ, read_img(MHD(path_mhd)))
+            path_nrrd = joinpath(path_dir_nrrd, f_basename(t, ch) * ".nrrd")
+            push!(list_img_λ, read_img(NRRD(path_nrrd)))
         end
         println("ch$ch parameter:")
         push!(list_λ, get_λ(list_img_λ))
@@ -63,20 +66,19 @@ function filter_mhd_gpu(param_path::Dict, path_dir_mhd::String, t_range, list_ch
         for (i_ch, ch) = enumerate(list_ch)
             λ_ch = list_λ[i_ch]
             basename = f_basename(t, ch)
-            path_mhd = joinpath(path_dir_mhd, basename * ".mhd")
-            path_mhd_filt = joinpath(path_dir_mhd_filt, basename * ".mhd")
-            path_raw_filt = joinpath(path_dir_mhd_filt, basename * ".raw")
+            path_nrrd = joinpath(path_dir_nrrd, basename * ".nrrd")
+            path_nrrd_filt = joinpath(path_dir_nrrd_filt, basename * ".nrrd")
             path_MIP = joinpath(path_dir_MIP_filt, basename * ".png")
             
-            img = Float32.(read_img(MHD(path_mhd)))
+            nrrd_in = NRRD(path_nrrd)
+            img = Float32.(read_img(nrrd_in))
             n_x, n_y, n_z = size(img)
             img_filt = zeros(type_img, n_x, n_y, n_z)
             for z = 1:n_z
                 img_filt[:,:,z] .= round.(type_img, gpu_imROF(img[:,:,z], λ_ch, 100))
             end
 
-            cp(path_mhd, path_mhd_filt, force=true)
-            write_raw(path_raw_filt, img_filt)
+            write_nrrd(path_nrrd_filt, img_filt, spacing(nrrd_in))
             imsave(path_MIP, maxprj(img_filt, dims=3) / vmax, cmap="gray");
         end
     end
