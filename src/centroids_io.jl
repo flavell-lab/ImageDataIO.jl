@@ -1,5 +1,5 @@
 """
-```write_centroids(centroids, out)```
+    write_centroids(centroids, out)
 
 Writes `centroids` to transformix-compatible file `out`
 """
@@ -14,7 +14,7 @@ function write_centroids(centroids, out)
 end
 
 """
-```read_centroids_transformix(input)```
+    read_centroids_transformix(input)
 
 Reads centroids from transformix output file `input`
 """
@@ -29,7 +29,7 @@ function read_centroids_transformix(input)
 end
 
 """
-```read_centroids_roi(input)```
+    read_centroids_roi(input)
 
 Reads centroids from `write_centroids` output file `input`
 """

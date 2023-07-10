@@ -1,5 +1,5 @@
 """
-```load_registration_problems(edge_file_paths::Array{String,1})```
+    load_registration_problems(edge_file_paths::Array{String,1})
 
 Loads a set of registration problems into an array.
 # Arguments:
@@ -18,7 +18,8 @@ function load_registration_problems(edge_file_paths::Array{String,1})
 end
 
 """
-```function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)```
+    function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)
+
 Modifies an elastix transform parameter file.
 
 # Arguments
@@ -58,7 +59,7 @@ function modify_parameter_file(param_in::String, param_out::String, substitution
 end
 
 """
-`read_parameter_file(parameter_file_path::String, key::String, dtype::Type)`
+    read_parameter_file(parameter_file_path::String, key::String, dtype::Type)
 
 Reads a value from a paremeter file.
 

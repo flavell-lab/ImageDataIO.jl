@@ -1,5 +1,5 @@
 """
-```get_λ(img_list::Array; verbose=true)```
+    get_λ(img_list::Array; verbose=true)
 
 Gets total variation noise filtering parameters from a list of images `img_list`. Can set `verbose` to `false` to suppress output.
 """
@@ -21,9 +21,11 @@ function get_λ(img_list::Array; verbose=true)
 end
 
 """
-```filter_nrrd_gpu(param_path::Dict, path_dir_nrrd::String, t_range, list_ch,
-    f_basename::Function; nrrd_filt_dir_key::String="path_dir_nrrd_filt", 
-    mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600)```
+    filter_nrrd_gpu(
+        param_path::Dict, path_dir_nrrd::String, t_range, list_ch,
+        f_basename::Function; nrrd_filt_dir_key::String="path_dir_nrrd_filt", 
+        mip_filt_dir_key::String="path_dir_MIP_filt", vmax=1600
+    )
 
 Runs total variation filtering on a set of images.
 
