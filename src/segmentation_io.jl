@@ -1,5 +1,5 @@
 """
-`load_training_set(h5_file::String)`
+```load_training_set(h5_file::String)```
 
 Loads training (or validation dataset) in 3D dataset `h5_file::String`.
 Returns `raw`, `label`, and `weight` fields.
@@ -14,7 +14,7 @@ function load_training_set(h5_file::String)
 end
 
 """
-`load_predictions(h5_file::String; threshold=nothing)`
+```load_predictions(h5_file::String; threshold=nothing)```
 
 Loads UNet predictions in 3D dataset `h5_file::String`.
 If the file has a fourth dimension, assumes predictions are stored in its second entry.
@@ -36,7 +36,7 @@ function load_predictions(h5_file::String; threshold=nothing)
 end
 
 """
-`write_watershed_errors(watershed_errors, path)`
+```write_watershed_errors(watershed_errors, path)```
 
 Writes `watershed_errors` to `path`.
 """
@@ -53,7 +53,7 @@ function write_watershed_errors(watershed_errors, path)
 end
 
 """
-`read_watershed_errors(path)`
+```read_watershed_errors(path)```
 
 Reads watershed errors from `path`.
 """
@@ -75,7 +75,7 @@ end
 
 
 """
-`resample_img(img, scales; dtype="raw")`
+```resample_img(img, scales; dtype="raw")```
 
 Scales an image down by using linear interpolation for the raw image, and bkg-gap priority interpoalation for the labels.
 

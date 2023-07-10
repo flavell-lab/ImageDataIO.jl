@@ -1,5 +1,5 @@
 """
-`function read_head_pos(head_path::String)`
+```function read_head_pos(head_path::String)```
 
 Reads the worm head position from the file `head_path::String`.
 Returns a dictionary mapping frame => head position of the worm at that frame.
@@ -16,7 +16,7 @@ function read_head_pos(head_path::String)
 end
 
 """
-`read_nrrd(rootpath, img_prefix, nrrd_path, frame, channel)`
+```read_nrrd(rootpath, img_prefix, nrrd_path, frame, channel)```
 
 Reads NRRD file from `\$(rootpath)/\$(nrrd_path)/\$(img_prefix)_t\$(channel).nrrd` and outputs resulting image.
 """        

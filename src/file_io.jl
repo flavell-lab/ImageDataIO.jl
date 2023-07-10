@@ -1,5 +1,5 @@
 """
-`back_one_dir(dir)`
+```back_one_dir(dir)```
 
 Given a directory as input, outputs the parent directory.
 """
@@ -15,7 +15,7 @@ function back_one_dir(dir)
 end
 
 """
-`get_filename(path_to_file)`
+```get_filename(path_to_file)```
 
 Given path to a file, outputs the filename.
 """

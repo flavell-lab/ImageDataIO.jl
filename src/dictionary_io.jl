@@ -182,7 +182,7 @@ function add_get_basename!(param_path::Dict, param::Dict)
 end
 
 """
-`change_rootpath!(param_path::Dict, new_rootpath::String)`
+```change_rootpath!(param_path::Dict, new_rootpath::String)```
 
 Updates a dictionary of paths `param_path` by changing the old rootpath to the `new_rootpath`
 """
@@ -197,7 +197,7 @@ end
 
 
 """
-`multi_index_array(array, index)`
+```multi_index_array(array, index)```
 
 Indexes a nested `array` at `index` as though the array was a mulit-dimensional array.
 """
