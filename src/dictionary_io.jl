@@ -1,4 +1,6 @@
 """
+`write_dict(dict, out::AbstractString; kv_delimiter::AbstractString=" ", kk_delimiter::AbstractString="\n")`
+
 Writes a dictionary to a file.
 
 # Arguments
@@ -16,6 +18,8 @@ function write_dict(dict, out::AbstractString; kv_delimiter::AbstractString=" ",
 end
 
 """
+`extract_key(dict, key, n::Integer, extract::Bool)`
+
 Adds or retrieves a key from a given layer of a nested dictionary.
 
 # Arguments
@@ -42,6 +46,8 @@ end
 
 
 """
+`read_2d_dict(input::AbstractString, outer_key_dtype::Type, inner_key_dtype::Type, val_dtype::Type)`
+
 Reads 2D dictionary (dictionary of dictionaries) from a file.
 
 # Arguments
@@ -67,6 +73,8 @@ end
 
 
 """
+`parse_1d_tuple(tuple_str::AbstractString, dtype::Type)`
+
 Parses one-dimensional string tuple `tuple_str::AbstractString` into a tuple of the specified `dtype::Type`
 """
 function parse_1d_tuple(tuple_str::AbstractString, dtype::Type)
@@ -75,6 +83,8 @@ end
 
 
 """
+`parse_1d_dict(dict_str::AbstractString, key_dtype::Type, val_dtype::Type)`
+
 Parses a 1D dictionary; the keys and values must be at most 1D arrays. Arguments:
 
 - `dict_str::AbstractString`: string representation of dictionary to parse
@@ -105,6 +115,8 @@ end
 
 
 """
+`split_arrays(arrays::AbstractString; fwd_delimiters=['[', '('], back_delimiters=[')', ']'], val_delimiters=[','], ignore_chars=[' ', '\n'])`
+
 Parses a string multi-dimensional array or list of arrays `arrays::AbstractString` into its component arrays.
 
 # Arguments
@@ -143,6 +155,8 @@ function split_arrays(arrays::AbstractString; fwd_delimiters=['[', '('], back_de
 end
 
 """
+`add_get_basename!(param_path::Dict)`
+
 Adds `get_basename` key to the dictionary `param_path`.
 """
 function add_get_basename!(param_path::Dict)
@@ -151,6 +165,8 @@ end
 
 
 """
+`add_get_basename!(param_path::Dict, param::Dict)`
+
 Adds `get_basename` key to the dictionary `param_path`, given information about multiple dataset timing in `param`.
 """
 function add_get_basename!(param_path::Dict, param::Dict)
@@ -166,6 +182,8 @@ function add_get_basename!(param_path::Dict, param::Dict)
 end
 
 """
+`change_rootpath!(param_path::Dict, new_rootpath::String)`
+
 Updates a dictionary of paths `param_path` by changing the old rootpath to the `new_rootpath`
 """
 function change_rootpath!(param_path::Dict, new_rootpath::String)
@@ -179,6 +197,8 @@ end
 
 
 """
+`multi_index_array(array, index)`
+
 Indexes a nested `array` at `index` as though the array was a mulit-dimensional array.
 """
 function multi_index_array(array, index)

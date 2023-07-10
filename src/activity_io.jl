@@ -1,4 +1,6 @@
 """
+`write_activity(activity, out)`
+
 Writes list of ROI activities `activity` to output file `out`.
 """
 function write_activity(activity, out)
@@ -10,6 +12,8 @@ function write_activity(activity, out)
 end
 
 """
+`read_activity(input)`
+
 Reads ROI activities from `input`.
 """
 function read_activity(input)

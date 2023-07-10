@@ -18,13 +18,12 @@ modify_parameter_file
 read_parameter_file
 ```
 
-## MHD File IO
+## NRRD File IO
 ```@docs
-read_mhd
-modify_mhd
+read_nrrd
 ```
 
-## Activity IO API
+## Activity IO
 ```@docs
 read_activity
 write_activity
@@ -41,10 +40,6 @@ read_centroids_roi
 ```@docs
 load_training_set
 load_predictions
+resample_img
 ```
 
-## Watershed Errors IO (not currently in use)
-```@docs
-write_watershed_errors
-read_watershed_errors
-```

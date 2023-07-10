@@ -1,4 +1,8 @@
 """
+`shear_correction_nrrd!(param_path::Dict, param::Dict, ch::Int, shear_params_dict::Dict;
+        vmax::Int=1600, nrrd_in_key::String="path_dir_nrrd", nrrd_out_key::String="path_dir_nrrd_shearcorrect",
+        MIP_out_key::String="path_dir_MIP_shearcorrect")`
+
 Applies shear correction to a dataset.
 # Arguments
  - `param_path::Dict`: Dictionary containing locations of input and output directories with NRRD files

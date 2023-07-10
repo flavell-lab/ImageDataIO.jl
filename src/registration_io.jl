@@ -1,4 +1,23 @@
 """
+`load_registration_problems(edge_file_paths::Array{String,1})`
+
+Loads a set of registration problems into an array.
+# Arguments:
+- `edge_file_paths::Array{String, 1}`: paths containing registration problems
+"""
+function load_registration_problems(edge_file_paths::Array{String,1})
+    reg_problems = []
+    for edge_file in edge_file_paths
+        open(edge_file, "r") do f
+            for line in eachline(f)
+                push!(reg_problems, Tuple(map(x->parse(Int64, x), split(line))))
+            end
+        end
+    end
+    return reg_problems
+end
+
+"""
 `function modify_parameter_file(param_in::String, param_out::String, substitutions::Dict; is_universal=false)`
 Modifies an elastix transform parameter file.
 
@@ -39,6 +58,8 @@ function modify_parameter_file(param_in::String, param_out::String, substitution
 end
 
 """
+`read_parameter_file(parameter_file_path::String, key::String, dtype::Type)`
+
 Reads a value from a paremeter file.
 
 # Arguments

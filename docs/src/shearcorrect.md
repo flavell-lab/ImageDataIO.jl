@@ -1,4 +1,4 @@
 # Shear Correction Wrapper API
 ```@docs
-shear_correction_mhd!
+shear_correction_nrrd!
 ```
