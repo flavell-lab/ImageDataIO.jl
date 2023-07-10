@@ -1,7 +1,7 @@
 # Dictionary IO API
 ```@docs
 add_get_basename!
-change_rootpath
+change_rootpath!
 write_dict
 read_2d_dict
 parse_1d_tuple
