@@ -42,6 +42,15 @@ jobs:
           path: ./NRRDIO.jl
           ref: main
           token: ${{ secrets.GOLDENRATIO1618_ACCESS_TOKEN }}
+      - name: Install Julia Python environment
+        run: julia --project=docs/ -e 'using Pkg; 
+          Pkg.add("PyCall");
+          ENV["PYTHON"] = "";
+          Pkg.build("PyCall");
+          Pkg.add("PyPlot");
+          Pkg.build("PyPlot");'
+      - name: Install matplotlib
+        run: ~/.julia/conda/3/x86_64/bin/pip install matplotlib
       - name: Install package
         run: julia --project=docs/ -e 'using Pkg; 
           Pkg.add(PackageSpec(path="./FlavellBase.jl"));
