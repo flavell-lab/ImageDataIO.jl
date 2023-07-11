@@ -1,6 +1,6 @@
 module ImageDataIO
 
-using FlavellBase, Statistics, HDF5, ProgressMeter, GPUFilter, CUDA, FFTRegGPU, NRRDIO
+using FlavellBase, Statistics, HDF5, ProgressMeter, GPUFilter, CUDA, FFTRegGPU, NRRDIO, PyPlot
 
 include("centroids_io.jl")
 include("worm_features_io.jl")
