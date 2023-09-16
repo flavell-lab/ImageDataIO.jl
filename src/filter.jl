@@ -70,7 +70,7 @@ function filter_nrrd_gpu(param_path::Dict, path_dir_nrrd::String, t_range, list_
     end
 
     # filtering
-    @showprogress for t = t_range
+    for t = t_range
         for (i_ch, ch) = enumerate(list_ch)
             λ_ch = list_λ[i_ch]
             basename = f_basename(t, ch)
