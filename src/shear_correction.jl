@@ -46,7 +46,33 @@ function shear_correction_nrrd!(param_path::Dict, param::Dict, ch::Int, shear_pa
         reg_stack_translate!(img_stack_reg_g, img1_f_g, img2_f_g, CC2x_g, N_g,
             reg_param=shear_params_dict[t])
         copyto!(img_stack_reg, img_stack_reg_g)
-        
+
+    # fill unknown data with noise
+    # (unknown because shearing brought unimaged pixels into frame,
+    #  previously replaced with wrap-around (bad))
+    # Note: if shear magnitude is over half the image, this does the wrong thing, but it's a bad frame anyway
+	noise_sampler = vec(img_stack_reg)
+	noise_cutoff = quantile(noise_sampler, 0.96) # Define "noise" as dimmest 96% of pixels
+	noise_sampler = noise_sampler[noise_sampler .<= noise_cutoff]
+	#faux_black = minimum(noise_sampler) #remove once correct quantile is identified
+	#img_stack_reg = broadcast((x) -> x > noise_cutoff ? faux_black : x, img_stack_reg) # remove once correct quantile is identiified
+	for z_slice in sort(collect(keys(shear_params_dict[t])))
+		x_shift = round(Int64, shear_params_dict[t][z_slice][2][1], RoundFromZero)
+		y_shift = round(Int64, shear_params_dict[t][z_slice][2][2], RoundFromZero)
+		for x in x_shift:-1
+			img_stack_reg[size(img_stack_reg)[1]+x+1, :, z_slice] = rand(noise_sampler, size(img_stack_reg)[2])
+		end
+		for x in 1:x_shift
+			img_stack_reg[x, :, z_slice] .= rand(noise_sampler, size(img_stack_reg)[2])
+		end
+		for y in y_shift:-1
+			img_stack_reg[:, size(img_stack_reg)[2]+y+1, z_slice] .= rand(noise_sampler, size(img_stack_reg)[1])
+		end
+		for y in 1:y_shift
+			img_stack_reg[:, y, z_slice] .= rand(noise_sampler, size(img_stack_reg)[1])
+		end
+	end
+
         write_nrrd(path_nrrd_out, floor.(UInt16, clamp.(img_stack_reg, typemin(UInt16), typemax(UInt16))),
             spacing(nrrd_in))
         imsave(path_MIP_out, maxprj(img_stack_reg, dims=3) / vmax, cmap="gray")
